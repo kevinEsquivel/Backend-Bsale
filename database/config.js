@@ -1,6 +1,6 @@
 const mysql = require("mysql");
 
-const conexion = mysql.createConnection({
+const conn = mysql.createConnection({
   host: "localhost", //mdb-test.c6vunyturrl6.us-west-1.rds.amazonaws.com
   database: "bsale_test",
   user: "bsale_test",
@@ -9,7 +9,7 @@ const conexion = mysql.createConnection({
 
 const dbConection = async () => {
   try {
-    conexion.connect((err) => {
+    conn.connect((err) => {
       if (err) {
         throw err;
       } else {
@@ -27,4 +27,5 @@ const dbConection = async () => {
 
 module.exports = {
   dbConection,
+  conn
 };
