@@ -41,12 +41,12 @@ const postProducto = async(req = request, res) =>{
         }
       }); */
 
-    const {nombre,uploadPath,precio, categoria} = req.body
+    const {nombre,uploadPath,precio, categoria,descuento} = req.body
 
-    conn.query(`insert into product(name,url_image,price,category) values ('${nombre}','${uploadPath}',${precio},${categoria})`, (err, results, fields) => {
+    conn.query(`insert into product(name,url_image,price,discount,category) values ('${nombre}','${uploadPath}',${precio},${descuento},${categoria})`, (err, results, fields) => {
         if (err) throw err;
         res.json({msg:"Elemento insertado"})
-      });  
+      });
 }
 
 //* Me hubiera 

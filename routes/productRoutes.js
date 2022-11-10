@@ -11,6 +11,8 @@ router.get('/:id', getProducto);
 router.get('/categoria/:id', getProductsForCategory);
 //insert products
 router.post('/',postProducto)
+// actualizar products
+
 
 
 module.exports = router;
