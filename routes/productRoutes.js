@@ -5,8 +5,8 @@ const router = Router();
 
 //Optener todos los productos
 router.get('/', getProductos);
-//*obtener un producto
-router.get('/:id', getProducto);
+//*obtener productos que se parescan
+router.get('/:nombre', getProducto);
 //obtener productos de una categoria
 router.get('/categoria/:id', getProductsForCategory);
 //insert products

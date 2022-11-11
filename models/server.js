@@ -11,7 +11,11 @@ class server {
     };
     
     
-    
+    //!ESTO ES PARA LOS SOCKETS
+    this.server = require("http").createServer(this.app); //!para el socket
+    this.io = require("socket.io")(this.server);
+
+    this.sockets();
     //!conectandome a la BD
     this.contectarDB();
     
@@ -25,7 +29,21 @@ class server {
   async contectarDB(){
     await dbConection();
   }
- 
+   //!SOCKETS
+   sockets() {
+    this.io.on("connection",  socket=> {
+      console.log("Socket conectado");
+
+      socket.on("disconnect", () => {
+        console.log("Socket desconectado");
+      });
+      /*  socket.on('enviar-mensaje',(payload,callback) => {//!el callback es para imprimir el console.log
+        const id = 123;
+        callback( id );
+        this.io.emit('enviar-mensaje',payload);//*esto es para enviar datos desde el server
+      }); */
+    });
+  }
   middlewares() {
     //directorio publico que se accedera con la ruta /
     this.app.use(express.static('public'))

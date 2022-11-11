@@ -9,14 +9,17 @@ const getProductos = async(req, res) =>{
         res.json({results})
       });  
 }
-//*function that  show one the product
+//*function that  show products that match with the string
 const getProducto = async(req = request, res) =>{
-    const id = req.params.id
-    conn.query(`select * from product where id =${id}`, (err, results, fields) => {
-        if (err) throw err;
-        if(results == 0 )res.json({msg:"El elemento no se encuentra"})
+    const {nombre} = req.params
+
+      conn.query(`select * from product where name like '${nombre}%'`, (err, results, fields) => {
+        if (err) return res.json({errors:"El elemento no se encuentra"});
+        if(results.length == 0 )return res.json({errors:"El elemento no se encuentra"})
+        
         res.json({results})
-      });  
+      }); 
+    
 }
 //*function that  show one the product for category
 const getProductsForCategory = async(req = request, res) =>{
@@ -49,7 +52,7 @@ const postProducto = async(req = request, res) =>{
       });
 }
 
-//* Me hubiera 
+
 
 /* //*function to edit product 
 const putProduct =async (req, res) =>{
