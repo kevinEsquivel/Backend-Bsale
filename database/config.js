@@ -8,17 +8,15 @@ const conn = mysql.createConnection({
 });
 
 const dbConection = async () => {
-  try {
+
     conn.connect((err) => {
       if (err) {
-        throw err;
+        console.log("error al conectar a la base de datos");
       } else {
         console.log("coneccion exitosa");
       }
     });
-  } catch (error) {
-    console.log("error al inicir la bd", error);
-  }
+  
 };
 
 

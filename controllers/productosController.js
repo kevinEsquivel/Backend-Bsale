@@ -13,12 +13,23 @@ const getProductos = async(req, res) =>{
 const getProducto = async(req = request, res) =>{
     const {nombre} = req.params
 
-      conn.query(`select * from product where name like '${nombre}%'`, (err, results, fields) => {
-        if (err) return res.json({errors:"El elemento no se encuentra"});
-        if(results.length == 0 )return res.json({errors:"El elemento no se encuentra"})
-        
-        res.json({results})
-      }); 
+    const {categoria = 0} = req.query;
+    console.log(nombre,categoria);
+      if(categoria !== '0'){
+        conn.query(`select * from product where name like '${nombre}%' and category = ${categoria}`, (err, results, fields) => {
+          if (err) throw err;
+          if(results.length == 0 )return res.json({errors:"El elemento no se encuentra2"})
+          
+          res.json({results})
+        }); 
+      }else{
+        conn.query(`select * from product where name like '${nombre}%'`, (err, results, fields) => {
+          if (err) throw err;
+          if(results.length == 0 )return res.json({errors:"El elemento no se encuentra"})
+          res.json({results})
+        }); 
+      }
+      
     
 }
 //*function that  show one the product for category
@@ -26,7 +37,7 @@ const getProductsForCategory = async(req = request, res) =>{
     const id_category = req.params.id
     conn.query(`select * from product where category =${id_category}`, (err, results, fields) => {
         if (err) throw err;
-        if(results == 0 )res.json({msg:"No hay elementos de esa categoria"})
+        if(results == 0 )res.json({msg:"No hay elementos de esa categoria3"})
         res.json({results})
       });  
 }
