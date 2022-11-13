@@ -1,10 +1,11 @@
 const { request } = require('express');
-const {conn} = require('../database/config');
+const { pool } = require('../database/config');
+
 
 //*function that show all the products
 const getProductos = async(req, res) =>{
     
-    conn.query(`select * from product`, (err, results, fields) => {
+    pool.query(`select * from product`, (err, results, fields) => {
         if (err) throw err;
         res.json({results})
       });  
@@ -16,14 +17,14 @@ const getProducto = async(req = request, res) =>{
     const {categoria = 0} = req.query;
     console.log(nombre,categoria);
       if(categoria !== '0'){
-        conn.query(`select * from product where name like '${nombre}%' and category = ${categoria}`, (err, results, fields) => {
+        pool.query(`select * from product where name like '${nombre}%' and category = ${categoria}`, (err, results, fields) => {
           if (err) throw err;
           if(results.length == 0 )return res.json({errors:"El elemento no se encuentra2"})
           
           res.json({results})
         }); 
       }else{
-        conn.query(`select * from product where name like '${nombre}%'`, (err, results, fields) => {
+        pool.query(`select * from product where name like '${nombre}%'`, (err, results, fields) => {
           if (err) throw err;
           if(results.length == 0 )return res.json({errors:"El elemento no se encuentra"})
           res.json({results})
@@ -35,7 +36,7 @@ const getProducto = async(req = request, res) =>{
 //*function that  show one the product for category
 const getProductsForCategory = async(req = request, res) =>{
     const id_category = req.params.id
-    conn.query(`select * from product where category =${id_category}`, (err, results, fields) => {
+    pool.query(`select * from product where category =${id_category}`, (err, results, fields) => {
         if (err) throw err;
         if(results == 0 )res.json({msg:"No hay elementos de esa categoria3"})
         res.json({results})
@@ -57,7 +58,7 @@ const postProducto = async(req = request, res) =>{
 
     const {nombre,uploadPath,precio, categoria,descuento} = req.body
 
-    conn.query(`insert into product(name,url_image,price,discount,category) values ('${nombre}','${uploadPath}',${precio},${descuento},${categoria})`, (err, results, fields) => {
+    pool.query(`insert into product(name,url_image,price,discount,category) values ('${nombre}','${uploadPath}',${precio},${descuento},${categoria})`, (err, results, fields) => {
         if (err) throw err;
         res.json({msg:"Elemento insertado"})
       });

@@ -17,7 +17,7 @@ class server {
 
     this.sockets();
     //!conectandome a la BD
-    this.contectarDB();
+    //this.contectarDB();
     
     //middlewares funcion que siempre se ejecutara cuando se activa el server
     this.middlewares();
