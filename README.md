@@ -1,7 +1,7 @@
 
 # Back-End Bsale Shop
  
-Este proyecto es el reto de la empresa bsale, para desarrollar un buscador de una tienda online, que se pueda buscar por catalogo, y por el nombre de los productos
+Este proyecto es el reto de la empresa bsale, para desarrollar un buscador de una tienda online, que se pueda buscar por catalogo, y por el nombre de los productos, Este proyecto se desarrollo con nodejs, express, y mysq. se an documentado las funciones para mejor entendimiento de estas.
 
 
 
