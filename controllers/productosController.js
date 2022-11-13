@@ -14,7 +14,7 @@ const getProductos = async(req, res) =>{
 const getProducto = async(req = request, res) =>{
     const {nombre} = req.params
 
-    const {categoria = 0} = req.query;
+    const {categoria = '0'} = req.query;
     console.log(nombre,categoria);
       if(categoria !== '0'){
         pool.query(`select * from product where name like '${nombre}%' and category = ${categoria}`, (err, results, fields) => {
